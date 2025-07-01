@@ -24,7 +24,7 @@ The dataset includes:
 - Benchmarking DNS-based intrusion detection systems
 - Comparative analysis of encrypted vs unencrypted exfiltration methods
 
-## 🛡 License
+#License
 
 This dataset is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
 
@@ -39,4 +39,4 @@ Under the following terms:
 - **NonCommercial** — You may not use the material for commercial purposes.
 
 For full details, see the [LICENSE](./LICENSE) file or visit:  
-🔗 https://creativecommons.org/licenses/by-nc/4.0/
+https://creativecommons.org/licenses/by-nc/4.0/
