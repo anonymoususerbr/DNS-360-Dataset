@@ -1,1 +1,40 @@
+## DoH-EXF Dataset
 
+This dataset was developed to support research on data exfiltration detection over DNS over HTTPS traffic. Unlike conventional DNS, DoH encapsulates DNS messages inside HTTPS/TLS, reducing direct visibility into DNS query content and requiring detection methods based mainly on flow-level and temporal behavior.
+
+The dataset contains 1,048,575 TCP/443 flows. Its class distribution includes 1,016,438 benign flows and 32,137 exfiltration flows, corresponding to 3.06% exfiltration traffic.
+
+This dataset is suitable for evaluating machine learning approaches for encrypted DNS traffic, particularly in scenarios where detection must rely on statistical and behavioral features rather than direct DNS payload inspection.
+
+### Features
+
+| Feature | Description |
+|---|---|
+| `src2dst_min_length` | Minimum packet size in the client-to-server direction. |
+| `src2dst_max_length` | Maximum packet size in the client-to-server direction. |
+| `src2dst_mean_length` | Mean packet size in the client-to-server direction. |
+| `src2dst_stddev_length` | Standard deviation of packet sizes in the client-to-server direction. |
+| `dst2src_min_length` | Minimum packet size in the server-to-client direction. |
+| `dst2src_max_length` | Maximum packet size in the server-to-client direction. |
+| `dst2src_mean_length` | Mean packet size in the server-to-client direction. |
+| `dst2src_stddev_length` | Standard deviation of packet sizes in the server-to-client direction. |
+| `bidirectional_max_length` | Maximum packet size considering both traffic directions. |
+| `bidirectional_mean_length` | Mean packet size considering the bidirectional flow. |
+| `bidirectional_stddev_length` | Standard deviation of packet sizes in the bidirectional flow. |
+| `src2dst_min_time` | Minimum inter-packet time in the client-to-server direction. |
+| `src2dst_max_time` | Maximum inter-packet time in the client-to-server direction. |
+| `src2dst_mean_time` | Mean inter-packet time in the client-to-server direction. |
+| `src2dst_stddev_time` | Standard deviation of inter-packet times in the client-to-server direction. |
+| `dst2src_min_time` | Minimum inter-packet time in the server-to-client direction. |
+| `dst2src_max_time` | Maximum inter-packet time in the server-to-client direction. |
+| `dst2src_mean_time` | Mean inter-packet time in the server-to-client direction. |
+| `dst2src_stddev_time` | Standard deviation of inter-packet times in the server-to-client direction. |
+| `bidirectional_min_time` | Minimum inter-packet time observed in the bidirectional flow. |
+| `bidirectional_max_time` | Maximum inter-packet time observed in the bidirectional flow. |
+| `bidirectional_mean_time` | Mean inter-packet time considering the bidirectional flow. |
+| `bidirectional_stddev_time` | Standard deviation of inter-packet times in the bidirectional flow. |
+| `num_src2dst` | Number of packets in the client-to-server direction. |
+| `num_dst2src` | Number of packets in the server-to-client direction. |
+| `flow_duration` | Total duration of the TLS flow. |
+| `byte_count` | Total number of bytes observed in the bidirectional flow. |
+| `handshake_time` | Approximate TLS handshake time. |
