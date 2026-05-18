@@ -1,1 +1,41 @@
+## Do53-EXF Dataset
 
+This dataset was designed to support research on data exfiltration detection over conventional DNS traffic on port 53. It includes benign DNS activity and malicious traffic generated through controlled exfiltration scenarios, with packet captures preserved in PCAP format and converted into a structured flow-based representation.
+
+The dataset contains 5,351,064 normalized samples. The class distribution includes 4,812,119 benign samples and 538,945 exfiltration samples, corresponding to 10.07% exfiltration traffic.
+
+This dataset is suitable for evaluating supervised machine learning models for DNS-based exfiltration detection, especially in scenarios where DNS queries and responses are observable in clear text.
+
+### Features
+
+| Feature | Description |
+|---|---|
+| `query_length` | Length of the full domain name (FQDN). |
+| `subdomain_length` | Length of the subdomain, corresponding to the first label of the FQDN. |
+| `num_labels` | Number of labels in the FQDN. |
+| `max_label_length` | Maximum length among the labels of the FQDN. |
+| `avg_label_length` | Average length of the labels in the FQDN. |
+| `entropy` | Entropy of the FQDN, used as a measure of character randomness. |
+| `ratio_digits` | Proportion of digits in the queried name, excluding dots. |
+| `ratio_uppercase` | Proportion of uppercase characters in the queried name, excluding dots. |
+| `ratio_lowercase` | Proportion of lowercase characters in the queried name, excluding dots. |
+| `ratio_special_chars` | Proportion of non-alphanumeric characters, excluding dots and hyphens. |
+| `rr_type` | DNS record type queried or returned. |
+| `query_class` | DNS query class. |
+| `ttl` | Time To Live value observed in returned records, when applicable. |
+| `contains_base64_pattern` | Indicator of patterns compatible with Base32/Base64 encoding in the domain. |
+| `contains_hex_pattern` | Indicator of long hexadecimal sequences in the domain. |
+| `contains_dictionary_word` | Indicator of the presence of common dictionary words. |
+| `ratio_vowels` | Proportion of vowels in the queried name. |
+| `ratio_consonants` | Proportion of consonants in the queried name. |
+| `num_distinct_characters` | Number of distinct characters in the queried name. |
+| `mean_query_length_per_domain` | Average query length grouped by base domain. |
+| `std_query_length_per_domain` | Standard deviation of query length grouped by base domain. |
+| `mean_entropy_per_domain` | Average entropy of queries grouped by base domain. |
+| `num_unique_ips` | Number of distinct IP addresses observed per base domain. |
+| `num_unique_asns` | Number of distinct autonomous systems observed per base domain. |
+| `num_unique_ttls` | Number of distinct TTL values observed per base domain. |
+| `mean_ttl` | Average TTL value per base domain. |
+| `var_ttl` | TTL variance per base domain. |
+| `num_queries_per_domain` | Total number of queries observed per base domain. |
+| `ratio_failed_queries` | Proportion of failed queries per base domain. |
