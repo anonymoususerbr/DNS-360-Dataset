@@ -1,1 +1,31 @@
+## Tranco List
 
+This folder contains the Tranco top-sites ranking used as an auxiliary reference in this project.
+
+Tranco is a research-oriented top-sites ranking designed to provide a more reliable and manipulation-resistant alternative to traditional website popularity lists. It was proposed in the paper *Tranco: A Research-Oriented Top Sites Ranking Hardened Against Manipulation* and is made available through the official Tranco service.
+
+In this project, the Tranco list is used only as an auxiliary resource for domain-based analysis, benign-domain comparison, filtering strategies and future feature engineering.
+
+## Possible Uses
+
+The Tranco list can support:
+
+- identification of popular domains in benign DNS traffic;
+- comparison between queried domains and well-known domains;
+- filtering or marking domains that appear in a popularity ranking;
+- enrichment of DNS-based features;
+- analysis of suspicious, random-looking or low-popularity domains;
+- future experiments involving domain popularity as an additional feature.
+
+## Citation
+
+If you use this resource in academic work, cite the original Tranco paper:
+
+```bibtex
+@inproceedings{lepochat2019tranco,
+  title     = {Tranco: A Research-Oriented Top Sites Ranking Hardened Against Manipulation},
+  author    = {Le Pochat, Victor and Van Goethem, Tom and Tajalizadehkhoob, Samaneh and Korczy{\'n}ski, Maciej and Joosen, Wouter},
+  booktitle = {Proceedings of the 26th Annual Network and Distributed System Security Symposium (NDSS 2019)},
+  year      = {2019},
+  doi       = {10.14722/ndss.2019.23386}
+}
