@@ -34,3 +34,18 @@ The expected output files are:
 ```text
 dataset_Do53.csv
 stats_Do53.csv
+
+The processing pipeline follows this sequence:
+
+```text
+Traffic generation
+        ↓
+PCAP/PCAPNG capture
+        ↓
+PCAP-to-Flow conversion
+        ↓
+Feature extraction
+        ↓
+CSV dataset
+        ↓
+Machine learning evaluation
