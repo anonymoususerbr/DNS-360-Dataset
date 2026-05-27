@@ -1,1 +1,46 @@
+# Machine Learning Experiments for DNS Exfiltration Detection
 
+This repository contains Python scripts used to train and evaluate machine learning models for detecting DNS-based data exfiltration in two traffic scenarios:
+
+- **Do53**: conventional DNS traffic over port 53.
+- **DoH**: DNS over HTTPS traffic.
+
+The experiments include three supervised learning algorithms:
+
+- Random Forest
+- Support Vector Machine
+- XGBoost
+
+## Files
+
+| File | Dataset | Model | Description |
+|---|---|---|---|
+| `ML_Do53_RF_V3.py` | Do53 | Random Forest | Trains and evaluates a Random Forest model using train/test CSV folders. Includes schema alignment, metrics, confusion matrix, predictions and SHAP support. |
+| `ML_Do53_SVM_V1.py` | Do53 | SVM | Trains and evaluates an SVM model using train/test CSV folders. Includes preprocessing, scaling, schema alignment, metrics and predictions. |
+| `ML_Do53_XGBoost_V1.py` | Do53 | XGBoost | Trains and evaluates an XGBoost model using train/test CSV folders. Includes class weighting, metrics, predictions and SHAP support. |
+| `ML_DoH_RF_V1.py` | DoH | Random Forest | Performs an 80/20 stratified split and evaluates a Random Forest model on the DoH dataset. |
+| `ML_DoH_SVM_V1.py` | DoH | Linear SVM | Performs an 80/20 stratified split and evaluates a Linear SVM model on the DoH dataset. |
+| `ML_DoH_XGBoost_V1.py` | DoH | XGBoost | Performs an 80/20 stratified split and evaluates an XGBoost model on the DoH dataset. |
+
+## Purpose
+
+The goal of these scripts is to establish supervised machine learning baselines for detecting exfiltration traffic in DNS and DNS-over-HTTPS datasets.
+
+The scripts generate evaluation artifacts such as:
+
+- `report.csv`
+- `classification_report.csv`
+- `confusion_matrix.csv`
+- `confusion_matrix_normalized.csv`
+- `predictions.csv`
+- `feature_inventory.csv`
+- `train_schema.csv`
+- feature importance files, when applicable
+- SHAP outputs, when applicable
+
+## Requirements
+
+Install the required Python packages before running the scripts:
+
+```bash
+pip install pandas numpy scikit-learn xgboost matplotlib shap
