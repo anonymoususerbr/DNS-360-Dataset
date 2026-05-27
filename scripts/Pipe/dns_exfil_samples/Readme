@@ -1,1 +1,94 @@
+# DNS Exfiltration Sample Files
 
+This folder contains sample files used as input artifacts for the controlled generation of DNS-based data exfiltration traffic in the DNS-360-Dataset project.
+
+The files are organized to represent common workstation artifacts with different formats and sizes. They are used to generate exfiltration traffic in both experimental scenarios:
+
+- **Do53**: conventional DNS over port 53.
+- **DoH**: DNS over HTTPS over TCP/443.
+
+## Purpose
+
+The objective of this folder is to provide a controlled and heterogeneous set of files for exfiltration experiments.
+
+These files allow the generation of malicious traffic with different data types and different volumes, supporting the analysis of how DNS-based exfiltration behaves under distinct file-size profiles.
+
+## File Categories
+
+The sample set includes the following file types:
+
+| File Type | Light Sample | Heavy Sample |
+|---|---|---|
+| Text | `text_light.txt` | `text_heavy.txt` |
+| Image | `image_light.jpg` | `image_heavy.jpg` |
+| Audio | `audio_light.wav` | `audio_heavy.wav` |
+| Video | `video_light.mp4` | `video_heavy.mp4` |
+| Compressed file | `compressed_light.zip` | `compressed_heavy.zip` |
+| Binary executable-like file | `exe_light.bin` | `exe_heavy.bin` |
+
+## Size Profiles
+
+The files are divided into two experimental profiles:
+
+| Profile | Description |
+|---|---|
+| `light` | Smaller files used to generate lower-volume exfiltration traffic. |
+| `heavy` | Larger files used to generate higher-volume exfiltration traffic. |
+
+This distinction supports controlled variation in the amount of data transmitted during the exfiltration process.
+
+## Methodological Context
+
+According to the dataset methodology, exfiltration scenarios were generated using a heterogeneous set of files representing common artifacts found in workstations, including text, images, audio, video, binaries and compressed files.
+
+These files were used as logical inputs for the exfiltration process in both Do53 and DoH scenarios. The goal was to keep the exfiltrated content types consistent across protocols while varying the transport mechanism and observability conditions.
+
+## Use in Do53 Exfiltration
+
+In the Do53 exfiltration scenario, the sample files are used as source content for DNS-based exfiltration.
+
+The data is typically:
+
+1. read from the sample file;
+2. fragmented into smaller chunks;
+3. encoded;
+4. inserted into DNS query names;
+5. transmitted through DNS traffic over port 53.
+
+This produces DNS queries that may exhibit characteristics such as longer subdomains, higher entropy, encoded strings and repeated queries to attacker-controlled domains.
+
+## Use in DoH Exfiltration
+
+In the DoH exfiltration scenario, the same type of sample files can be used as source content for exfiltration over HTTPS/TLS.
+
+The data is typically:
+
+1. read from the sample file;
+2. fragmented into chunks;
+3. transmitted through multiple HTTPS requests compatible with the DoH communication model;
+4. observed as encrypted TCP/443 traffic.
+
+Because DoH encrypts the DNS content, the resulting behavior is analyzed mainly through flow-level characteristics such as packet sizes, direction, timing, duration and byte count.
+
+## Folder Structure
+
+```text
+dns_exfil_samples/
+│
+├── text_light.txt
+├── text_heavy.txt
+│
+├── image_light.jpg
+├── image_heavy.jpg
+│
+├── audio_light.wav
+├── audio_heavy.wav
+│
+├── video_light.mp4
+├── video_heavy.mp4
+│
+├── compressed_light.zip
+├── compressed_heavy.zip
+│
+├── exe_light.bin
+└── exe_heavy.bin
