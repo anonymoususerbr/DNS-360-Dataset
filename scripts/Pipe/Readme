@@ -1,1 +1,36 @@
+## PCAP-to-Flow Feature Extraction
 
+This folder also contains scripts used to convert raw packet captures into tabular datasets for machine learning experiments.
+
+| File | Scenario | Description |
+|---|---|---|
+| `PCAP to FLOW-DO53.py` | Do53 | Extracts features from conventional DNS traffic over port 53 and generates `dataset_Do53.csv` and `stats_Do53.csv`. |
+| `PCAP to FLOW-DOH.py` | DoH | Extracts flow-based features from DNS-over-HTTPS traffic over TCP/443 and generates `dataset_DoH.csv`, `doh_clienthello_report.csv` and `stats_DoH.csv`. |
+
+### Do53 Feature Extraction
+
+The Do53 script processes `.pcap` and `.pcapng` files containing conventional DNS traffic. It extracts lexical, structural and DNS-related attributes from queries and responses.
+
+The generated dataset contains 29 features plus the target label.
+
+Main extracted feature groups include:
+
+- query length and subdomain length
+- number of labels
+- maximum and average label length
+- entropy
+- digit, uppercase, lowercase and special character ratios
+- DNS record type and query class
+- TTL-related attributes
+- Base64 and hexadecimal pattern indicators
+- dictionary-word indicator
+- vowel and consonant ratios
+- number of distinct characters
+- domain-level aggregate statistics
+- failed-query ratio
+
+The expected output files are:
+
+```text
+dataset_Do53.csv
+stats_Do53.csv
