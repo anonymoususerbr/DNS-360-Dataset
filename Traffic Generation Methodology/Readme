@@ -1,1 +1,151 @@
+# Traffic Generation Methodology
 
+This folder documents the methodology used to generate benign and exfiltration traffic for the DNS-360-Dataset project.
+
+The methodology follows the experimental design described in the paper **ANONIMO-Do53-EXF and ANONIMO-DoH-EXF: datasets for DNS-based data exfiltration detection**.
+
+## Overview
+
+The dataset was generated to support the study of DNS-based data exfiltration in two scenarios:
+
+- **Do53**: conventional DNS traffic over port 53.
+- **DoH**: DNS over HTTPS traffic over TCP/443.
+
+For each protocol, two traffic classes were generated:
+
+- **Benign**: legitimate DNS or DoH resolution traffic.
+- **Exfiltration**: controlled data exfiltration traffic using DNS or DoH as the transport channel.
+
+This design allows comparison between clear-text DNS traffic and encrypted DNS traffic under a common experimental framework.
+
+## Experimental Design
+
+The traffic generation process was organized into four scenarios:
+
+| Scenario | Protocol | Class | Description |
+|---|---|---|---|
+| Benign Do53 | DNS over port 53 | Benign | Conventional DNS queries to legitimate resolvers. |
+| Exfiltration Do53 | DNS over port 53 | Exfiltration | Data fragments encapsulated into DNS queries. |
+| Benign DoH | DNS over HTTPS | Benign | DoH queries sent over HTTPS/TLS to public resolvers. |
+| Exfiltration DoH | DNS over HTTPS | Exfiltration | Data fragments transmitted through HTTPS requests compatible with the DoH paradigm. |
+
+## Benign Traffic Generation
+
+Benign traffic was generated in a controlled way to represent legitimate name resolution behavior.
+
+The queried domains were selected from the **Tranco list**, a research-oriented top-sites ranking designed to provide a reliable and manipulation-resistant list of popular domains.
+
+Using Tranco helps reduce arbitrary domain selection and improves the quality of the benign baseline.
+
+### Benign Do53
+
+In the Do53 benign scenario, the victim machine generated conventional DNS queries over UDP/53 to legitimate DNS resolvers.
+
+The generation process considered:
+
+- diversity of queried domains;
+- controlled query volume;
+- controlled query timing;
+- different DNS record types when applicable;
+- legitimate DNS resolution behavior.
+
+### Benign DoH
+
+In the DoH benign scenario, the victim machine generated DNS-over-HTTPS queries over TCP/443 to public DoH resolvers.
+
+Because DoH encapsulates DNS messages inside HTTPS/TLS, the observable behavior is based on:
+
+- TCP/443 flows;
+- packet sizes;
+- packet direction;
+- timing patterns;
+- TLS communication behavior.
+
+## Exfiltration Traffic Generation
+
+The exfiltration scenarios were generated using a controlled set of files representing common workstation artifacts.
+
+The file set included:
+
+- text files;
+- images;
+- audio files;
+- video files;
+- executable binaries;
+- compressed files.
+
+The files were organized into two size profiles:
+
+| Profile | Description |
+|---|---|
+| `light` | Files up to approximately 1 MB. |
+| `heavy` | Files larger than approximately 1 MB. |
+
+This strategy introduced controlled variation in the volume of exfiltrated data.
+
+## Exfiltration Do53
+
+In the Do53 exfiltration scenario, the victim machine established a DNS-based command-and-control/exfiltration channel using **dnscat2**.
+
+The exfiltrated data was:
+
+1. fragmented;
+2. encoded;
+3. inserted into DNS query names;
+4. sent to a domain controlled by the attacker.
+
+This scenario reflects a classic DNS tunneling and data exfiltration approach, where the payload is carried through manipulated DNS queries.
+
+## Exfiltration DoH
+
+In the DoH exfiltration scenario, a custom client was used to transmit data through HTTPS requests compatible with the DNS-over-HTTPS paradigm.
+
+The exfiltrated content was:
+
+1. fragmented;
+2. distributed across multiple HTTPS requests;
+3. transmitted over TCP/443;
+4. observed through encrypted-flow behavior rather than clear-text DNS content.
+
+Unlike Do53, the semantic content of DNS queries is not directly visible in DoH. Therefore, the exfiltration behavior is reflected mainly in flow-level characteristics such as:
+
+- packet length statistics;
+- packet direction;
+- flow duration;
+- byte count;
+- inter-packet timing;
+- bidirectional traffic behavior.
+
+## Laboratory Environment
+
+The traffic was generated in a controlled cloud-based laboratory environment.
+
+The lab topology included:
+
+- an attacker environment;
+- a victim environment;
+- segmented private networks;
+- routing and traffic observation through FortiGate;
+- log support through FortiAnalyzer;
+- Kali Linux as the attacker machine;
+- Ubuntu as the victim machine;
+- Windows Server for auxiliary functions.
+
+The objective of the topology was to isolate attacker and victim roles, preserve experimental control, and capture network traffic in PCAP/PCAPNG format.
+
+## Labeling Strategy
+
+Labels were assigned according to the experimental scenario that generated each capture.
+
+| Capture Origin | Label |
+|---|---|
+| Benign Do53 traffic | `Benign` |
+| Exfiltration Do53 traffic | `Exfiltration` |
+| Benign DoH traffic | `Benign` |
+| Exfiltration DoH traffic | `Exfiltration` |
+
+Because the traffic was generated in controlled and separated scenarios, each PCAP/PCAPNG file could be associated with its corresponding class.
+
+## PCAP-to-Flow Processing
+
+After traffic generation, the packet captures were converted into structured CSV datasets using Python-based PCAP-to-Flow scripts.
